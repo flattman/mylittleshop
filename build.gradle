@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+  	id "org.sonarqube" version "2.2.1"
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = '1.0'
+
+sonarqube {
+  properties {
+    property 'sonar.host.url', 'http://localhost:9000'
+    property 'sonar.projectName', 'mylittleshop'
+    property 'sonar.projectKey', 'mylittleshop'
+  }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src"]
+        }
+    }
+    test {
+    	java {
+    		srcDirs = ["test"]
+		}
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'mylittleshop build with gradle',
+                   'Implementation-Version': version,
+                   'Main-Class': 'de.realist.shop.Controller'
+    }
+    from {
+    	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile files('lib/commons-lang-2.6.jar')
+    runtime fileTree(dir: 'lib', include: '*.jar')
+    
+    testCompile "junit:junit:4.12"
+}

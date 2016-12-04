@@ -1,19 +1,10 @@
 plugins {
     id 'java'
-  	id "org.sonarqube" version "2.2.1"
 }
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 version = '1.0'
-
-sonarqube {
-  properties {
-    property 'sonar.host.url', 'http://localhost:9000'
-    property 'sonar.projectName', 'mylittleshop'
-    property 'sonar.projectKey', 'mylittleshop'
-  }
-}
 
 sourceSets {
     main {
@@ -22,8 +13,8 @@ sourceSets {
         }
     }
     test {
-    	java {
-    		srcDirs = ["test"]
+        java {
+            srcDirs = ["test"]
 		}
 	}
 }
@@ -35,7 +26,7 @@ jar {
                    'Main-Class': 'de.realist.shop.Controller'
     }
     from {
-    	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 

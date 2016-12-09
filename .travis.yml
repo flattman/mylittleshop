@@ -12,7 +12,7 @@ cache:
 deploy:
   provider: releases
   api_key: ${api_key}
-  file: "build/libs/Project.jar"
+  file: "build/libs/mylittleshop-1.0.jar"
   skip_cleanup: true
   on:
     all_branches: true
